@@ -1,53 +1,21 @@
-# twitter-clone
+* `sudo docker-compose up --remove-orphans`
+* `sudo docker ps -a`
 
-## API
 
-### Create a Tweet
+### detached
+* `sudo docker run -d denoland/deno:1.15.3`
+* `docker attach <id|name>`
 
-#### Request
 
+### environment variable
+
+### mount mysql to volume
+* the docker volume lives in `/var/lib/docker/volumes/data_volume`
+`sudo docker run -v data_volume:/var/lib/mysql mysql`
 ```
-POST /tweets HTTP/1.1
-Content-Type: application/json
-
-{
-  "tweet": "My first tweet"
-}
-```
-
-#### Response
-
-```
-HTTP/1.1 201 OK
-Date: <just-now>
-Location: http://localhost/tweets/936DA01F9ABD4d9d80C702AF85C822A8
-Content-Type: application/json
-ETag: <hashed-id>
-Last-Modified: <just-now>
-
-{
-  "tweet_id": "936DA01F9ABD4d9d80C702AF85C822A8"
-}
+sudo docker run \
+--mount type=volume,source=data_volume,target=/var/lib/mysql \
+mysql
 ```
 
-### Display Tweets
-
-#### Request
-
-```
-GET /tweets HTTP/1.1
-```
-
-#### Response
-
-```
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-[
-  {
-    "tweet_id": "936DA01F9ABD4d9d80C702AF85C822A8",
-    "tweet": "My first tweet"
-  }
-]
-```
+###

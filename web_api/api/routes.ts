@@ -1,10 +1,10 @@
 import { Router } from "./deps.ts";
-import { listTweets, postTweet } from "./controllers/tweets.controller.ts";
+import { getTweets, postTweet } from "./controllers/tweets.controller.ts";
 
 const router = new Router();
 
 router
-  .get("/tweets", listTweets)
+  .get("/tweets", getTweets)
   .post("/tweets", postTweet)
 ;
 
