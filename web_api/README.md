@@ -1,21 +1,22 @@
-* `sudo docker-compose up --remove-orphans`
-* `sudo docker ps -a`
+# Setup
+1. Create a file named `.env` inside the `web_api` directory with default content
+    ```
+    # .env default content
+    MYSQL_PASSWORD=password
+    API_PORT=4444
+    ```
+2. Build docker images
+  * `sudo docker-compose build`
+3. Run the docker images
+  * `sudo docker-compose up`
+4. Confirm they are alive
+  * `sudo docker ps`
+  * The Deno web server and MySQL database will should be "Up"
 
+## To run stuff on the MySQL database docker image
+* `sudo docker exec -it db bash`
+* `mysql -p` provide the MYSQL_PASSWORD in the `.env` file
 
-### detached
-* `sudo docker run -d denoland/deno:1.15.3`
-* `docker attach <id|name>`
-
-
-### environment variable
-
-### mount mysql to volume
-* the docker volume lives in `/var/lib/docker/volumes/data_volume`
-`sudo docker run -v data_volume:/var/lib/mysql mysql`
-```
-sudo docker run \
---mount type=volume,source=data_volume,target=/var/lib/mysql \
-mysql
-```
-
-###
+### MySQL command reference
+* `show databases;` lists all dbs
+* `select Database() from dual;` shows current db

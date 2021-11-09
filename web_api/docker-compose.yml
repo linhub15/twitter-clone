@@ -1,15 +1,32 @@
 version: "3.8"
 
 services:
-  # db:
-  #   image: mysql
-  #   command: --default-authentication-plugin=mysql_native_password
-  #   restart: always
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: example
+  db:
+    container_name: db
+    image: mysql/mysql-server:8.0.27
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - type: volume
+        source: persistence   # name of the volume
+        target: /var/lib/mysql
   api:
+    container_name: api
+    restart: always
     build: 
       context: .
       dockerfile: api.Dockerfile
-    ports:
-      - "4444:4444"
+    environment:
+      MYSQL_HOSTNAME: ${MYSQL_HOSTNAME}
+      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_USERNAME: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+volumes:
+  persistence: {}

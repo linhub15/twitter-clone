@@ -1,0 +1,8 @@
+CREATE DATABASE IF NOT EXISTS twitter;
+
+USE twitter;
+
+CREATE TABLE IF NOT EXISTS tweet (
+  id VARCHAR(36),
+  message VARCHAR(280)
+);

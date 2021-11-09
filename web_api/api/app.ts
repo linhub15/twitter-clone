@@ -1,3 +1,4 @@
+import "https://deno.land/x/dotenv/load.ts";
 import { yellow } from "https://deno.land/std@0.99.0/fmt/colors.ts";
 import { Application } from "./deps.ts";
 import { loggingMiddleware } from "./middlewares/logging.middleware.ts";
@@ -11,7 +12,6 @@ app.use(loggingMiddleware);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
-
 
 app.addEventListener("listen", ({ secure, hostname, port }) => {
   console.info(

@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  db:
+    volumes:
+    - type: bind
+      source: ./db
+      target: /home
+      read_only: true
+  api:
+    ports:
+    - ${API_PORT}:${API_PORT}
+    environment:
+      API_PORT: ${API_PORT}
